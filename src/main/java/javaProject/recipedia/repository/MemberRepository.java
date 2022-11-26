@@ -1,4 +1,8 @@
 package javaProject.recipedia.repository;
 
-public interface MemberRepository {
+import javaProject.recipedia.domain.Member;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+public interface MemberRepository extends JpaRepository<Member, Long> {
 }

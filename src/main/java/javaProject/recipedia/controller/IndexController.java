@@ -39,18 +39,26 @@ public class IndexController {
     }
 
     @PostMapping("/loginUs")
-    public String loginUs(@RequestBody RequestDto member) {
+    public String loginUs(@RequestBody RequestDto member, HttpServletRequest req) {
 //        System.out.println(member.getUserId());
 //        System.out.println(member.getUserPassword());
+        HttpSession session = req.getSession();
         Member member1 = memberService.login(member);
         if (member1 != null) {
 //            System.out.println(member1.getUserId());
 //            System.out.println(member1.getUserPassword());
+            session.setAttribute("member", member1);
             return "home";
         }
         System.out.println("fail");
+        session.setAttribute("member", null);
         return "login";
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "home";
+    }
 }
 

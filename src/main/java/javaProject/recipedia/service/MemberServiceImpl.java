@@ -22,4 +22,8 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.save(member1);
     }
 
+    @Override
+    public Member login(RequestDto member) {
+        return memberRepository.findMemberByUserIdAndUserPassword(member.getUserId(), member.getUserPassword());
+    }
 }

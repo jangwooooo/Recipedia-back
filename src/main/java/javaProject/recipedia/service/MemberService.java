@@ -5,4 +5,5 @@ import javaProject.recipedia.dto.RequestDto;
 
 public interface MemberService {
     void join(RequestDto member);
+    Member login(RequestDto member);
 }

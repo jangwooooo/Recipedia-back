@@ -38,5 +38,19 @@ public class IndexController {
         return "login";
     }
 
+    @PostMapping("/loginUs")
+    public String loginUs(@RequestBody RequestDto member) {
+//        System.out.println(member.getUserId());
+//        System.out.println(member.getUserPassword());
+        Member member1 = memberService.login(member);
+        if (member1 != null) {
+//            System.out.println(member1.getUserId());
+//            System.out.println(member1.getUserPassword());
+            return "home";
+        }
+        System.out.println("fail");
+        return "login";
+    }
+
 }
 

@@ -79,7 +79,7 @@ async function handleLogOut() {
     document.cookie = "token=; max-age=0; path=/";
 
     await fetch("/user/log-out", data);
-    await window.location.replace("home.html");
+    await window.location.replace("home");
 }
 
 function sendRecipeFavRequest(token, recipePk, isCreation) {
@@ -162,7 +162,7 @@ async function sendAuthorizationRequest(userId, userPassword) {
     await fetch("/user/auth", data)
         .then((response) => response.json())
         .then((data) => {
-            document.cookie = `token=${data.token}; max-age=${3600 * 24 * 3}; path=/`;
+            document.cookie = `token=${data}; max-age=${3600 * 24 * 3}; path=/`;
         });
-    await window.location.replace("home.html");
+    await window.location.replace("home");
 }

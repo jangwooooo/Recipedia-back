@@ -7,9 +7,9 @@ if (q) {
     const prevPageBtn = document.createElement("a");
     prevPageBtn.className = "nav-terminal";
     if (localStorage.getItem("favs") !== null) {
-        prevPageBtn.href = "./favs.html";
+        prevPageBtn.href = "/favs";
     } else {
-        prevPageBtn.href = `./search.html?q=${q}`;
+        prevPageBtn.href = `/search?q=${q}`;
     }
 
     const prevIcon = document.createElement("i");
@@ -22,7 +22,7 @@ if (q) {
 
 const homeBtn = document.createElement("a");
 homeBtn.className = "nav-terminal";
-homeBtn.href = `./home.html`;
+homeBtn.href = `/home`;
 
 const homeIcon = document.createElement("i");
 homeIcon.className = "fi fi-rr-home";
@@ -52,7 +52,7 @@ function displayEmptyPage() {
     insideContainer.appendChild(errorBox);
 
     const img = document.createElement("img");
-    img.src = "/images/error.png";
+    img.src = "/static/images/error.png";
     img.id = "not-found-image";
     errorBox.appendChild(img);
 

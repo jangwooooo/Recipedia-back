@@ -35,16 +35,16 @@ async function handleWindowLoad() {
         document.getElementById("profile").style.display = "none";
     }
 
-    if (path !== "/html/detail.html") {
+    if (path !== "/detail") {
         searchForm["q"].value = q;
         removeElementById("paginator-container");
         displayLoadingScreen();
-        if (notFirstTimeFavs === null && path === "/html/favs.html") {
+        if (notFirstTimeFavs === null && path === "/favs") {
             await searchFavs();
             localStorage.setItem("firstTimeFavs", false);
         }
 
-        if (notFirstTimeHome === null && path === "/html/home.html") {
+        if (notFirstTimeHome === null && path === "/home") {
             await searchRecipe();
             localStorage.setItem("firstTimeHome", false);
         }
@@ -102,7 +102,7 @@ function displayEmptyList() {
 
     const notFoundImage = document.createElement("img");
     notFoundImage.id = "not-found-image";
-    notFoundImage.src = "/images/error.png";
+    notFoundImage.src = "/static/images/error.png";
     emptyContainer.appendChild(notFoundImage);
 
     const notFoundText = document.createElement("span");
@@ -247,7 +247,7 @@ function createRecipeCard(recipe) {
     const isFav = checkFav(recipePK);
 
     const a = document.createElement("a");
-    a.href = `./detail.html?pk=${recipePK}&q=${q}`;
+    a.href = `/detail?pk=${recipePK}&q=${q}`;
 
     const recipeCard = document.createElement("span");
     recipeCard.className = "recipe-card";
@@ -374,10 +374,10 @@ async function searchRecipe(event) {
         localStorage.setItem(index, JSON.stringify(dataSet[index]));
     }
     if (token !== "") {
-        // await getUserFavs(token);
+        await getUserFavs(token);
     }
     if (typeof event !== "undefined") {
-        await window.location.replace(`search.html?q=${q}`);
+        await window.location.replace(`search?q=${q}`);
     }
 }
 
@@ -391,7 +391,7 @@ async function displayLoadingScreen() {
 
     const loadingGif = document.createElement("img");
     loadingGif.id = "loading-gif";
-    loadingGif.src = "/images/spin.gif";
+    loadingGif.src = "/static/images/spin.gif";
     loadingContainer.appendChild(loadingGif);
 
     const loadingText = document.createElement("span");

@@ -5,15 +5,19 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Table(name = "favorites")
+@Entity
+@Table(name = "token")
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Favorites {
+public class Token {
 
-    private String recipeId;
-    private String userId;
+    @Id
+    private String token;
+    private Long userPk;
 }

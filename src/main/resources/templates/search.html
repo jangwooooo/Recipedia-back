@@ -20,7 +20,11 @@
         <div id="inside-container">
             <header>
                 <nav>
-                    <span id="terminal-section"></span>
+                    <span id="terminal-section">
+                        <a href="./home.html" class="nav-terminal">
+                            <i class="fi fi-rr-home" style="top: 0;"></i>
+                        </a>
+                    </span>
                     <span id="user-section">
                         <a href="./favs.html" id="favs" class="nav-terminal">
                             <i class="fi fi-rs-heart"></i>
@@ -45,16 +49,16 @@
                     <img src="../images/logo.png" id="logo">
                 </span>
             </header>
-            <form id="search-box">
+            <form id="search-box" action="./search.html">
                 <input type="text" name="q" id="text-input" placeholder="레시피 검색...">
                 <button type="submit" id="search">
                     <i class="fi fi-rr-search"></i>
                 </button>
             </form>
             <div id="list-title">
-                <img src="../images/crown.png">
+                <img src="../images/search-alt.png">
                 <span id="list-title-text">
-                    추천 레시피
+                    검색 결과
                 </span>
                 <span id="filter-type-container">
                     종류
@@ -95,13 +99,13 @@
                         <span class="registration-input-label">
                             아이디
                         </span>
-                        <input type="text" autocomplete="username" name="username" class="registration-input-box">
+                        <input type="text" autocomplete="username" class="registration-input-box">
                     </span>
                     <span class="registration-input-container">
                         <span class="registration-input-label">
                             비밀번호
                         </span>
-                        <input type="password" name="password" class="registration-input-box">
+                        <input type="password" class="registration-input-box">
                     </span>
                     <button class="registration-submit">
                         로그인
@@ -115,7 +119,7 @@
                         <span class="registration-input-label">
                             아이디
                         </span>
-                        <input type="text" autocomplete="username" name="username" class="registration-input-box">
+                        <input type="text" autocomplete="username" class="registration-input-box">
                     </span>
                     <span class="registration-input-container">
                         <span class="registration-input-label">

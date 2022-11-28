@@ -20,8 +20,11 @@ logOutBtn.addEventListener("click", handleLogOut);
 arrow.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 modalCloseBtn.addEventListener("click", closeModal);
 signupForm.addEventListener("submit", validatePassword);
-loginForm.addEventListener("submit", () =>
-    sendAuthorizationRequest(loginForm["username"].value, loginForm["password"].value)
+loginForm.addEventListener("submit", (event) =>
+{
+    event.preventDefault();
+    sendAuthorizationRequest(loginForm["username"].value, loginForm["password"].value);
+}
 );
 window.addEventListener("scroll", displayArrow);
 
@@ -160,9 +163,13 @@ async function sendAuthorizationRequest(userId, userPassword) {
     };
 
     await fetch("/user/auth", data)
-        .then((response) => response.json())
+        .then((response) => {
+            console.log(response);
+            return response.json();
+        })
         .then((data) => {
-            document.cookie = `token=${data}; max-age=${3600 * 24 * 3}; path=/`;
+            document.cookie = `token=${data.token}; max-age=${3600 * 24 * 3}; path=/`;
+            console.log(data);
         });
     await window.location.replace("home");
 }

@@ -95,21 +95,6 @@ function removeElementById(id) {
     }
 }
 
-function displayEmptyList() {
-    const emptyContainer = document.createElement("div");
-    emptyContainer.id = "empty-container";
-    insideContainer.appendChild(emptyContainer);
-
-    const notFoundImage = document.createElement("img");
-    notFoundImage.id = "not-found-image";
-    notFoundImage.src = "/static/images/error.png";
-    emptyContainer.appendChild(notFoundImage);
-
-    const notFoundText = document.createElement("span");
-    notFoundText.id = "not-found-text";
-    notFoundText.innerText = "찾으시는 레시피가 없습니다";
-    emptyContainer.appendChild(notFoundText);
-}
 
 function createRecipeCards() {
     recipeJson = getLocalStorageItems(filterBtn.value);
@@ -379,25 +364,6 @@ async function searchRecipe(event) {
     if (typeof event !== "undefined") {
         await window.location.replace(`search?q=${q}`);
     }
-}
-
-async function displayLoadingScreen() {
-    listTitle.style.display = "none";
-
-    removeElementById("list");
-    const loadingContainer = document.createElement("div");
-    loadingContainer.id = "loading-container";
-    insideContainer.appendChild(loadingContainer);
-
-    const loadingGif = document.createElement("img");
-    loadingGif.id = "loading-gif";
-    loadingGif.src = "/static/images/spin.gif";
-    loadingContainer.appendChild(loadingGif);
-
-    const loadingText = document.createElement("span");
-    loadingText.id = "loading-text";
-    loadingText.innerText = "레시피를 찾는 중입니다";
-    loadingContainer.appendChild(loadingText);
 }
 
 function handleThumbnailDoesntExist(imageURL, recipe) {

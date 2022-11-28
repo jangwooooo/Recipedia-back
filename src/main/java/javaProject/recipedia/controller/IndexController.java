@@ -3,6 +3,7 @@ package javaProject.recipedia.controller;
 import javaProject.recipedia.domain.Member;
 import javaProject.recipedia.domain.Token;
 import javaProject.recipedia.dto.RequestDto;
+import javaProject.recipedia.dto.ResponseDto;
 import javaProject.recipedia.service.MemberService;
 import javaProject.recipedia.service.TokenService;
 import lombok.RequiredArgsConstructor;
@@ -48,7 +49,7 @@ public class IndexController {
 
     @PostMapping("/user/auth")
     @ResponseBody
-    public String loginUs(@RequestBody RequestDto member) {
+    public ResponseDto loginUs(@RequestBody RequestDto member) {
 //        System.out.println(member.getUserId());
 //        System.out.println(member.getUserPassword());
         Member member1 = memberService.login(member);
@@ -58,7 +59,8 @@ public class IndexController {
             tokenService.insertToken(new Token(token, member1.getId()));
 //            System.out.println(member1.getUserId());
 //            System.out.println(member1.getUserPassword());
-            return token;
+
+            return new ResponseDto(token);
             //  json 형식으로 token 반환
         }
         System.out.println("fail");
@@ -68,6 +70,7 @@ public class IndexController {
 
     @PostMapping("/user/log-out")
     public void logout(@RequestBody String token) {
+        tokenService.deleteToken(token);
     }
 
     @PostMapping("/recipe/set")

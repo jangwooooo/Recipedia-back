@@ -8,4 +8,5 @@ public interface TokenService {
      Long findUserPkByToken(String token);
      String createToken();
      void insertToken(Token token);
+     void deleteToken(String token);
 }

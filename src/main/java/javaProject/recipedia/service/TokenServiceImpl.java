@@ -36,4 +36,9 @@ public class TokenServiceImpl implements TokenService{
                 .build();
         tokenRepository.save(token1);
     }
+
+    @Override
+    public void deleteToken(String token) {
+        tokenRepository.deleteAll();
+    }
 }

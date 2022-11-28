@@ -5,14 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/common.css">
-    <link rel="stylesheet" href="../static/css/detail.css">
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-straight/css/uicons-solid-straight.css'>
-    <link rel='stylesheet'
-        href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-straight/css/uicons-bold-straight.css'>
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link th:href="@{/css/common.css}" rel="stylesheet" >
+    <link th:href="@{/css/detail.css}" rel="stylesheet" >
+    <link rel='stylesheet' th:href="@{https://cdn-uicons.flaticon.com/uicons-solid-straight/css/uicons-solid-straight.css}">
+    <link rel='stylesheet' th:href="@{https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css}">
+    <link rel='stylesheet' th:href="@{https://cdn-uicons.flaticon.com/uicons-bold-straight/css/uicons-bold-straight.css}">
+    <link rel='stylesheet' th:href="@{https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css}">
+    <link rel='stylesheet' th:href="@{https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css}">
     <title>Recipedia</title>
 </head>
 
@@ -29,7 +28,7 @@
                         <span id="log-out" class="nav-terminal">
                             <i class="fi fi-rs-sign-out-alt"></i>
                         </span>
-                        <button id="profile" style='background-image: url("../static/images/user.png");'>
+                        <button id="profile" th:style="'background-image: url(/images/user.png);'">
                             <ul id="profile-options">
                                 <li id="option-login">
                                     로그인
@@ -60,7 +59,7 @@
         <div id="modal">
             <div id="registration-container">
                 <i class="fi fi-br-cross"></i>
-                <img src="../static/images/logo-icon.png" id="registration-logo">
+                <img th:src="@{/images/logo-icon.png}" id="registration-logo">
                 <form id="login-form">
                     <span class="registration-form-title">
                         로그인
@@ -110,9 +109,9 @@
             </div>
         </div>
     </div>
-    <script src="../static/js/common.js"></script>
-    <script src="../static/js/detail.js"></script>
-    <script src="../static/js/util.js"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/detail.js}"></script>
+    <script th:src="@{/js/util.js}"></script>
 </body>
 
 </html>

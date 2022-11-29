@@ -86,10 +86,11 @@ async function handleLogOut() {
 }
 
 function sendRecipeFavRequest(token, recipePk, isCreation) {
+    let method = "";
     if (isCreation) {
-        const method = "POST";
+        method = "POST";
     } else {
-        const method = "DELETE";
+        method = "DELETE";
     }
 
     recipePk = parseInt(recipePk);
@@ -101,6 +102,7 @@ function sendRecipeFavRequest(token, recipePk, isCreation) {
             "Content-Type": "application/json",
         },
     };
+    console.log(data);
 
     fetch("/recipe/set", data);
 }
@@ -111,11 +113,11 @@ function toggleSelected(event) {
     token = getCookie("token");
     if (token !== "") {
         if (block.classList.contains("fav-btn-block-active")) {
+            sendRecipeFavRequest(token, block.parentElement.parentElement.pk, false);
             block.classList.remove("fav-btn-block-active");
-            sendRecipeFavRequest(token, block.parentElement.parentElement.pk, true);
         } else {
             block.classList.add("fav-btn-block-active");
-            sendRecipeFavRequest(token, block.parentElement.parentElement.pk, false);
+            sendRecipeFavRequest(token, block.parentElement.parentElement.pk, true);
         }
     } else {
         alert("로그인이 필요합니다");

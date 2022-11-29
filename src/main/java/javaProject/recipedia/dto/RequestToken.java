@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResponseDto {
-    String token;
+public class RequestToken {
+
+    private String token;
+    private Long recipePk;
 }

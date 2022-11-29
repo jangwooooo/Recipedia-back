@@ -61,23 +61,27 @@ async function searchFavs() {
     displayLoadingScreen();
 
     await getAPI("*", false).then(getAPI("*", true));
-
     if (token !== "") {
         await getUserFavs(token);
     }
-    const list = await localStorage.getItem("favs").split(",");
+    await console.log(dataSet);
 
-    dataSet = dataSet.filter((data) => {
-        for (const index in list) {
-            if (data.RCP_SEQ === list[index]) {
-                return true;
+    setTimeout(() => {
+        console.log(localStorage.getItem("favs"));
+        const list = localStorage.getItem("favs").split(",");
+
+        dataSet = dataSet.filter((data) => {
+            for (const index in list) {
+                if (data.RCP_SEQ === list[index]) {
+                    return true;
+                }
             }
+            return false;
+        });
+        for (const index in dataSet) {
+            localStorage.setItem(index, JSON.stringify(dataSet[index]));
         }
-        return false;
-    });
-    for (const index in dataSet) {
-        localStorage.setItem(index, JSON.stringify(dataSet[index]));
-    }
+    }, 5000)
 }
 
 function createList() {

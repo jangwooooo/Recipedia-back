@@ -39,6 +39,6 @@ public class TokenServiceImpl implements TokenService{
 
     @Override
     public void deleteToken(String token) {
-        tokenRepository.deleteAll();
+        tokenRepository.deleteById(token);
     }
 }

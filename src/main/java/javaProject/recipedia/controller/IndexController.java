@@ -1,9 +1,13 @@
 package javaProject.recipedia.controller;
 
+import javaProject.recipedia.domain.Favs;
 import javaProject.recipedia.domain.Member;
 import javaProject.recipedia.domain.Token;
 import javaProject.recipedia.dto.RequestDto;
+import javaProject.recipedia.dto.RequestToken;
+import javaProject.recipedia.dto.RespnoseFavs;
 import javaProject.recipedia.dto.ResponseDto;
+import javaProject.recipedia.service.FavsService;
 import javaProject.recipedia.service.MemberService;
 import javaProject.recipedia.service.TokenService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 @Controller
@@ -21,6 +24,7 @@ public class IndexController {
 
     private final MemberService memberService;
     private final TokenService tokenService;
+    private final FavsService favsService;
 
     @GetMapping("/home")
     public String home() {
@@ -55,17 +59,13 @@ public class IndexController {
         Member member1 = memberService.login(member);
         if (member1 != null) {
             // 토큰생성 -> userPk와 같이 token테이블에 저장
-            String token = tokenService.createToken();
-            tokenService.insertToken(new Token(token, member1.getId()));
-//            System.out.println(member1.getUserId());
-//            System.out.println(member1.getUserPassword());
-
-            return new ResponseDto(token);
-            //  json 형식으로 token 반환
+            String token = tokenService.createToken();     // 토큰 생성
+            System.out.println(token);
+            tokenService.insertToken(new Token(token, member1.getId()));   // userPk와 token을 token테이블에 저장
+            return new ResponseDto(token); //  json 형식으로 token 반환
         }
         System.out.println("fail");
-        return null;
-        // 실패시 null 반환
+        return null;  // 실패시 null 반환
     }
 
     @PostMapping("/user/log-out")
@@ -73,26 +73,36 @@ public class IndexController {
         tokenService.deleteToken(token);
     }
 
+    @ResponseBody
     @PostMapping("/recipe/set")
-    public void fvsAdd(@RequestBody String token, Integer recipePk) {
+    public RequestToken fvsAdd(@RequestBody RequestToken requestToken) {
         // token에 맞는 userPk를 찾고 그 userPk로 찜한 recipePk를 테이블에 추가한다.
-
-        Long userPk = tokenService.findUserPkByToken(token);
+        Long userPk = tokenService.findUserPkByToken(requestToken.getToken());
+        favsService.addFavs(userPk, requestToken.getRecipePk());
+        return requestToken;
     }
 
+    @ResponseBody
     @DeleteMapping("/recipe/set")
-    public void fvsdel(@RequestBody String token, Integer recipePk) {
+    public RequestToken fvsDel(@RequestBody RequestToken requestToken) {
         // token에 맞는 userPk를 찾고 그 userPk로 찜한 recipePk를 테이블에 삭제한다.
-
-        Long userPk = tokenService.findUserPkByToken(token);
+        Long userPk = tokenService.findUserPkByToken(requestToken.getToken());
+        favsService.delFavs(userPk, requestToken.getRecipePk());
+        return requestToken;
     }
 
+    @ResponseBody
     @PostMapping("/user/recipe")
-    public ArrayList<Integer> findRecipe(@RequestBody String token) {
+    public RespnoseFavs findRecipe(@RequestBody ResponseDto responseDto) {
         // token에 맞는 userPk를 찾고 그 userPk로 찜 목록을 반환
-
-        Long userPk = tokenService.findUserPkByToken(token);
-        return new ArrayList<>();
+        System.out.println(responseDto);
+        Long userPk = tokenService.findUserPkByToken(responseDto.getToken());
+        List<Favs> favs = favsService.getFavs(userPk);
+        ArrayList<Long> recipePkList = new ArrayList<>();
+        for (Favs fav : favs) {
+            recipePkList.add(fav.getRecipePk());
+        }
+        return new RespnoseFavs(recipePkList);
     }
 }
 

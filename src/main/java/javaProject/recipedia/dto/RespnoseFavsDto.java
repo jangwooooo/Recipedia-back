@@ -4,11 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestToken {
+public class RespnoseFavsDto {
 
-    private String token;
-    private Long recipePk;
+    ArrayList<Long> list;
 }

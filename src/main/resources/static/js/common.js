@@ -48,7 +48,7 @@ async function handleWindowLoad() {
             await searchRecipe();
             localStorage.setItem("firstTimeHome", false);
         }
-        await createRecipeCards();
+        setTimeout(createRecipeCards, 1000);
     }
 }
 
@@ -81,7 +81,7 @@ async function searchFavs() {
         for (const index in dataSet) {
             localStorage.setItem(index, JSON.stringify(dataSet[index]));
         }
-    }, 5000)
+    }, 3000)
 }
 
 function createList() {
